@@ -124,7 +124,9 @@ app.post("/tts", async (req, res) => {
 })
 
 // 启动服务
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
 
   console.log(
     "服务器启动：http://localhost:3000"

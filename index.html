@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="
+      width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no
+    "
+  />
+
+  <title>深国创中心小七AI数字人</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- 数字人视频 -->
+    <video
+      id="avatarVideo"
+      autoplay
+      muted
+      playsinline
+      webkit-playsinline
+    >
+      <source
+        src="idle.mp4"
+        type="video/mp4"
+      />
+    </video>
+
+    <!-- 顶部按钮 -->
+    <div class="top-bar">
+
+      <button class="glass-btn">
+        历史对话
+      </button>
+
+      <button class="glass-btn">
+        声音开关
+      </button>
+
+    </div>
+
+    <!-- AI回复区域 -->
+    <div
+      class="reply-box"
+      id="replyBox"
+    >
+
+      你好！我是小七，
+      你可以向我提问关于深国创中心的问题～
+
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-area">
+
+      <!-- 波纹 -->
+      <div class="wave"></div>
+
+      <!-- 麦克风 -->
+      <button
+        id="micBtn"
+        class="mic-btn"
+      >
+        🎤
+      </button>
+
+      <!-- 状态 -->
+      <div
+        class="mic-text"
+        id="status"
+      >
+        点击开始说话
+      </div>
+
+      <!-- 输入框 -->
+      <div class="text-input-area">
+
+        <input
+          type="text"
+          id="textInput"
+          placeholder="请输入问题..."
+        />
+
+        <button id="sendBtn">
+          发送
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 关键：固定audio -->
+  <audio
+    id="ttsAudio"
+    preload="auto"
+  ></audio>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

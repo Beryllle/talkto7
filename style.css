@@ -4,38 +4,60 @@
   box-sizing: border-box;
 }
 
+/* 基础背景 */
 body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: sans-serif;
-  /* --- 修改点 1: PC端背景色和对齐方式 --- */
-  background: #1a1a1a; /* PC端两侧的背景色，深灰色更显高级 */
+  background: #111; /* PC端两侧的背景色 */
   display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center;    /* 垂直居中 */
+  justify-content: center;
+  align-items: center;
 }
 
+/* 核心容器 */
 .container {
   position: relative;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  /* --- 手机端默认：全屏 --- */
   width: 100%;
   height: 100vh;
-  /* --- 修改点 2: 限制PC端最大宽度 --- */
-  max-width: 500px; /* 模拟大屏手机的宽度，你可以根据需要调成 430px 或 450px */
-  background: black; /* 数字人背景依然是黑色 */
-  overflow: hidden;
-  box-shadow: 0 0 50px rgba(0,0,0,0.8); /* 给竖屏区域加个阴影，在PC上更有质感 */
 }
 
-/* 全屏视频 */
+/* --- 关键：针对 PC 端（屏幕宽度大于 768px）的强制修改 --- */
+@media screen and (min-width: 768px) {
+  .container {
+    /* 强制 9:16 比例 */
+    aspect-ratio: 9 / 16; 
+    
+    /* 高度占屏幕的 90%，宽度根据比例自动计算 */
+    height: 90vh; 
+    width: auto; 
+    
+    /* 让它看起来像个手机 */
+    border: 6px solid #333; 
+    border-radius: 40px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+}
+
+/* 视频：始终填满容器 */
 video {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 保持比例填充，不拉伸 */
+  object-fit: cover; /* 保证视频按比例填充容器，不拉伸 */
+  z-index: 0;
 }
 
-/* 顶部区域 */
+/* --- 以下是你原本的 UI 样式，保持不变 --- */
 .top-bar {
   position: absolute;
   top: 30px;
@@ -47,7 +69,6 @@ video {
   z-index: 10;
 }
 
-/* 毛玻璃按钮 */
 .glass-btn {
   padding: 10px 18px;
   border: 1px solid rgba(255,255,255,0.2);
@@ -59,7 +80,6 @@ video {
   cursor: pointer;
 }
 
-/* 中间回复框 */
 .reply-box {
   position: absolute;
   left: 50%;
@@ -76,7 +96,6 @@ video {
   z-index: 10;
 }
 
-/* 底部区域 */
 .bottom-area {
   position: absolute;
   bottom: 40px;
@@ -87,7 +106,6 @@ video {
   z-index: 10;
 }
 
-/* 麦克风按钮 */
 .mic-btn {
   width: 100px;
   height: 100px;
@@ -102,14 +120,12 @@ video {
   cursor: pointer;
 }
 
-/* 麦克风文字 */
 .mic-text {
   color: white;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-/* 输入框区域 */
 .text-input-area {
   width: 82%;
   display: flex;

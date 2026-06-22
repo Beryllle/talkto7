@@ -4,172 +4,143 @@
   box-sizing: border-box;
 }
 
+/* 基础背景 */
 body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: sans-serif;
-  background: black;
+  background: #111; /* PC端两侧的背景色 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* 核心容器 */
 .container {
   position: relative;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  /* --- 手机端默认：全屏 --- */
   width: 100%;
   height: 100vh;
-  overflow: hidden;
 }
 
-/* 全屏视频 */
+/* --- 关键：针对 PC 端（屏幕宽度大于 768px）的强制修改 --- */
+@media screen and (min-width: 768px) {
+  .container {
+    /* 强制 9:16 比例 */
+    aspect-ratio: 9 / 16; 
+    
+    /* 高度占屏幕的 90%，宽度根据比例自动计算 */
+    height: 90vh; 
+    width: auto; 
+    
+    /* 让它看起来像个手机 */
+    border: 6px solid #333; 
+    border-radius: 40px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+}
+
+/* 视频：始终填满容器 */
 video {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* 保证视频按比例填充容器，不拉伸 */
+  z-index: 0;
 }
 
-/* 顶部区域 */
+/* --- 以下是你原本的 UI 样式，保持不变 --- */
 .top-bar {
   position: absolute;
   top: 30px;
   left: 0;
   width: 100%;
   padding: 0 20px;
-
   display: flex;
   justify-content: space-between;
   z-index: 10;
 }
 
-/* 毛玻璃按钮 */
 .glass-btn {
   padding: 10px 18px;
-
   border: 1px solid rgba(255,255,255,0.2);
-
   background: rgba(255,255,255,0.12);
-
   backdrop-filter: blur(10px);
-
   color: white;
-
   border-radius: 30px;
-
   font-size: 14px;
+  cursor: pointer;
 }
 
-/* 中间回复框 */
 .reply-box {
   position: absolute;
-
   left: 50%;
   transform: translateX(-50%);
-
   bottom: 260px;
-
   width: 82%;
-
   padding: 20px;
-
   border-radius: 24px;
-
   background: rgba(255,255,255,0.12);
-
   backdrop-filter: blur(12px);
-
   color: white;
-
   line-height: 1.7;
-
   font-size: 18px;
-
   z-index: 10;
 }
 
-/* 底部区域 */
 .bottom-area {
   position: absolute;
-
   bottom: 40px;
-
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   z-index: 10;
 }
 
-/* 波纹 */
-/*.wave {
-  width: 70%;
-  height: 40px;
-
-  margin-bottom: 20px;
-
-  border-radius: 100px;
-
-  background: rgba(255,255,255,0.08);
-
-  backdrop-filter: blur(10px);
-}*/
-
-/* 麦克风按钮 */
 .mic-btn {
   width: 100px;
   height: 100px;
-
   border-radius: 50%;
-
   border: none;
-
   background: rgba(0,140,255,0.7);
-
   backdrop-filter: blur(10px);
-
   color: white;
-
   font-size: 40px;
-
   margin-bottom: 14px;
-
   box-shadow: 0 0 30px rgba(0,140,255,0.5);
+  cursor: pointer;
 }
 
-/* 麦克风文字 */
 .mic-text {
   color: white;
-
   font-size: 16px;
-
   margin-bottom: 20px;
 }
 
-/* 输入框区域 */
 .text-input-area {
   width: 82%;
-
   display: flex;
   gap: 10px;
 }
 
 input {
   flex: 1;
-
   height: 48px;
-
   border: none;
-
   border-radius: 30px;
-
   padding: 0 20px;
-
   background: rgba(255,255,255,0.12);
-
   backdrop-filter: blur(10px);
-
   color: white;
-
   outline: none;
 }
 
@@ -179,14 +150,10 @@ input::placeholder {
 
 #sendBtn {
   width: 80px;
-
   border: none;
-
   border-radius: 30px;
-
   background: rgba(255,255,255,0.2);
-
   backdrop-filter: blur(10px);
-
   color: white;
+  cursor: pointer;
 }

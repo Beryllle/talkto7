@@ -137,61 +137,41 @@ async function askDoubao(question) {
   try {
 
     const response = await fetch(
-      "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "http://localhost:3000/chat",
       {
 
         method: "POST",
 
         headers: {
 
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
 
-          Authorization: `Bearer ${API_KEY}`,
         },
 
         body: JSON.stringify({
 
-          model: "ep-20260507164321-l4ppb",
+          question: question
 
-          messages: [
+        })
 
-            {
-              role: "system",
-
-              content: `
-你是深国创中心的AI数字人小七。
-请用亲切、简洁、正式的语气回答。
-你的职责是介绍深国创中心相关信息。
-回答要求：
-
-1. 回答简短、可爱
-2. 控制在50字以内
-3. 用口语化表达
-4. 不要长篇解释
-5. 直接回答问题
-              `,
-            },
-
-            {
-              role: "user",
-
-              content: question,
-            },
-          ],
-        }),
       }
+
     )
 
     const data = await response.json()
 
-    return data.choices[0].message.content
+    return data.answer
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(error)
 
     return "抱歉，我暂时无法回答。"
+
   }
+
 }
 
 // 处理问题

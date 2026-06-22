@@ -79,7 +79,7 @@ async function speakText(text) {
     console.log("开始请求TTS")
 
     const response = await fetch(
-      "http://localhost:3000/tts",
+      "https://talkto7.onrender.com/tts",
       {
 
         method: "POST",

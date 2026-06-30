@@ -137,7 +137,7 @@ async function askDoubao(question) {
   try {
 
     const response = await fetch(
-      "http://localhost:3000/chat",
+      "https://talkto7.onrender.com/chat",
       {
 
         method: "POST",
